@@ -1,0 +1,11 @@
+{
+    "package_name": "ragcore",
+    "package_version": "0.0.3",
+    "package_url":"https://github.com/Harish-Nedunuri/SecureRAG.git",
+    "package_description": "This package is Secure RAG application",
+    "tasks": [            
+        "DocuPromptTask",
+        "EmbeddingsLLM",
+        "CommonCore"   
+    ]
+}
