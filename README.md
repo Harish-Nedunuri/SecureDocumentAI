@@ -2,7 +2,7 @@
 
 ## Overview
 
-Secure RAG is a Python package designed for implementing a secure Retrieval-Augmented Generation (RAG) system using Large Language Models (LLMs). The system is built on top of FastAPI and integrates Azure Document Intelligence OCR models for document processing. The application ensures secure access through OAuth2 authentication, making it suitable for sensitive use cases that require both document understanding and secure user authentication.
+Secure Document AI is a Python package designed for implementing a Retrieval-Augmented Generation (RAG) system capable of handling PII information securely whilst using Large Language Models (LLMs). The system is built on top of FastAPI and integrates Azure Document Intelligence OCR models for document processing. The application ensures secure access through OAuth2 authentication, making it suitable for sensitive use cases that require both document understanding and secure user authentication.
 
 ## Features
 
