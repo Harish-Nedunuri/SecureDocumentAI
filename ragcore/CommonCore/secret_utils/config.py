@@ -33,9 +33,9 @@ class Settings(BaseSettings):
     STORAGE_ACCOUNT_NAME: str = os.getenv('STORAGE_ACCOUNT_NAME')
     STORAGE_ACCOUNT_KEY: str = os.getenv('STORAGE_ACCOUNT_KEY')
     STORAGE_CONNECTION_STRING: str = f"DefaultEndpointsProtocol=https;AccountName={STORAGE_ACCOUNT_NAME};AccountKey={STORAGE_ACCOUNT_KEY};EndpointSuffix=core.windows.net"
-    AUTH_TOKEN: str = os.getenv('AUTH_TOKEN')
+    SECRET_KEY: str = os.getenv('SECRET_KEY', 'your-secret-key')
     OPENAI_API_KEY: str = os.getenv('OPENAI_API_KEY')
-    USER_AGENT: bool = os.getenv('USER_AGENT')
+    USER_AGENT: bool = os.getenv('USER_AGENT',default=False)
 
    
     
