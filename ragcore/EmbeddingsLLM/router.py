@@ -1,10 +1,9 @@
 from fastapi import HTTPException
-from ragcore.EmbeddingsLLM.args import FineTuneLLMArgs
-from ragcore.EmbeddingsLLM.entry import FineTuneLLM
+from ragcore.EmbeddingsLLM.args import EmbeddingsArgs
+from ragcore.EmbeddingsLLM.entry import VectorStorePersist
 from fastapi import APIRouter, Depends, status
-from fastapi import APIRouter, Depends, HTTPException
-from ragcore.CommonCore.secret_utils.config import get_current_token
-from fastapi import APIRouter, Depends, File, UploadFile, HTTPException, status
+from ragcore.SupportUtils.security_utils.oauth2_security import oauth2Scheme as get_current_token
+from fastapi import  File, UploadFile
 import os
 import shutil
 
@@ -18,8 +17,6 @@ router = APIRouter(
 # Define the directory where files should be saved
 BASE_DIR = "training_data"
 PDF_DIR = os.path.join(BASE_DIR, "pdf_files")
-
-
 
 @router.post('', status_code=status.HTTP_201_CREATED, description="Use this API to Store the Embeddings to the vector store.")
 async def vector_store_embeddings(
@@ -39,11 +36,11 @@ async def vector_store_embeddings(
             raise HTTPException(status_code=400, detail="Unsupported file type. Only PDFs are allowed.")
 
         # Create an instance of FineTuneLLMArgs with the saved file path
-        args = FineTuneLLMArgs(
+        args = EmbeddingsArgs(
             document_path=PDF_DIR,
         )        
         # Create an instance of FineTuneLLM and persist embeddings
-        mapper = FineTuneLLM(args)
+        mapper = VectorStorePersist(args)
         response = mapper.persist_embeddings()
         
         return response

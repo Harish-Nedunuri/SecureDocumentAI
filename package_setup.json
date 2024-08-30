@@ -4,8 +4,8 @@
     "package_url":"https://github.com/Harish-Nedunuri/SecureDocumentAI.git",
     "package_description": "This package is Secure DocumentAI application",
     "tasks": [            
-        "DocuPromptTask",
+        "QueryPromptTask",
         "EmbeddingsLLM",
-        "CommonCore"   
+        "SupportUtils"   
     ]
 }

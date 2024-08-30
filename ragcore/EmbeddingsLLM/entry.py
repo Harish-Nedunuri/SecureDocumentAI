@@ -1,18 +1,18 @@
 import os
 import shutil
-from langchain_community.document_loaders import PyPDFDirectoryLoader, JSONLoader
+from langchain_community.document_loaders import PyPDFDirectoryLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.schema.document import Document
 from langchain_community.vectorstores import Chroma
-from ragcore.CommonCore.secret_utils.config import get_settings
-from ragcore.CommonCore.llm_utils.get_embedding_function import get_embedding_function
-from ragcore.EmbeddingsLLM.args import FineTuneLLMArgs, parse_arguments
-from ragcore.CommonCore.audit.logging import logger
+from ragcore.SupportUtils.secret_utils.config import get_settings
+from ragcore.SupportUtils.llm_utils.get_embedding_function import get_embedding_function
+from ragcore.EmbeddingsLLM.args import EmbeddingsArgs, parse_arguments
+from ragcore.SupportUtils.audit.logging import logger
 from langchain_community.document_loaders import Docx2txtLoader,TextLoader
-from ragcore.CommonCore.secret_utils.config import get_settings
+from ragcore.SupportUtils.secret_utils.config import get_settings
 import json
 
-class FineTuneLLM:
+class VectorStorePersist:
     def __init__(self, arguments):
         self.arguments = arguments
         self.settings = get_settings()
@@ -147,13 +147,13 @@ class FineTuneLLM:
 
 
 def main():
-    # args = parse_arguments()
-    args = {
-        "document_path": "training_data\pdf_files" ,
-        "reset_vectorstore"  : True
-    }
-    args = FineTuneLLMArgs(**args)
-    mapper = FineTuneLLM(args)
+    args = parse_arguments()
+    # args = {
+    #     "document_path": "" ,
+    #     "reset_vectorstore"  : True
+    # }
+    # args = EmbeddingsArgs(**args)
+    mapper = VectorStorePersist(args)
     mapper.persist_embeddings()
     logger.info("✅ Document Training Task is now complete")
 
