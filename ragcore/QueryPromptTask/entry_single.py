@@ -42,16 +42,10 @@ class GetPromptResponse:
         # from langchain_openai import ChatOpenAI
 
         anonymizer = PresidioReversibleAnonymizer()
+        
+        
         logger.info("Anonymizing text...")
-        # template = """Rewrite this text into an official, short email:
-
-        # {anonymized_text}"""
-        # prompt = PromptTemplate.from_template(template)
-        # llm = ChatOpenAI(temperature=0)
-
-        # chain = {"anonymized_text": anonymizer.anonymize} | prompt | llm
-        # response = chain.invoke(text)
-        # print(response.content)
+        
         prompt_template = get_prompt()        
         model = ChatOpenAI(model=self.arguments.modelid, \
                             temperature=self.arguments.llm_temperature,\
@@ -65,8 +59,9 @@ class GetPromptResponse:
             partial_variables={"format_instructions": parser.get_format_instructions()},
         )
         
-        chain = {"context": anonymizer.anonymize} | prompt | model | parser
-        # llm_output = model.invoke(prompt)
+        chain =  prompt | model | parser 
+        
+      
         llm_output = chain.invoke({"query":self.arguments.query,"context":context_text})
         response = {}
         response["content"] = llm_output.content
@@ -88,7 +83,7 @@ def main():
     args = DocuPromptArgs(**args)
     mapper = GetPromptResponse(args)
     response = mapper.read_code()
-    
+    print(response)
     logger.info(" Document Prompt Task is now complete")
 
 if __name__ == "__main__":
