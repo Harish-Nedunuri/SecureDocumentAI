@@ -1,0 +1,26 @@
+# Use the official Python image from the Docker Hub
+FROM python:3.10-slim
+
+# Create and set the working directory
+WORKDIR /app
+
+# Copy the all file into the working directory
+COPY . /app/
+
+# Install the dependencies
+RUN apt-get update \
+    && apt-get install -y sqlite3 libsqlite3-dev \
+    && pip install --upgrade pip \
+    && pip install -r requirements.txt \
+    && pip install .
+
+
+# Copy the contents of the local vectorstore folder to the container's vectorstore folder
+COPY vectorstore /app/vectorstore
+
+# Expose the port the app runs on
+EXPOSE 8501
+
+# Command to run the application
+CMD ["streamlit", "run", "front_end/ragcore_ui.py", "--server.port=8501", "--server.address=0.0.0.0"]
+

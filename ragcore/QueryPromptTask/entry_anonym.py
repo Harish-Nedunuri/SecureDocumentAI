@@ -34,6 +34,7 @@ embeddings = OpenAIEmbeddings()
 docsearch = Chroma.from_documents(chunks, embeddings)
 retriever = docsearch.as_retriever()
 
+print(type(retriever))
 
 
 # 6. Create anonymizer chain

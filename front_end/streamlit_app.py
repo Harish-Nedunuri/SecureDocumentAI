@@ -11,7 +11,7 @@ API_URL_QUERY = "http://localhost:8000/single-document-query"
 API_URL_MULTI_QUERY = "http://localhost:8000/multiple-document-query"
 AUTH_TOKEN = "Bearer askdgsdlkdafkgdlakfbnlkfdnblksewijfoijfoioivnw002898"
 headers = {
-                'Authorization': AUTH_TOKEN,
+                'Authorization': f"access_token",
                 'accept': 'application/json'
             }
 # set page configs
@@ -29,9 +29,11 @@ st.sidebar.image("static\DAIsi-logos.jpeg")
 st.sidebar.title(" ⚙️ Configs")
 st.sidebar.button("Reset", on_click=reset_app)
 
+# Main Page Banner
 st.markdown("<h1 style='text-align: center; color: blue;'>DAISI</h1>", unsafe_allow_html=True)
 st.markdown("<h3 style='text-align: center; color: black;'>Document AI for Search and Insights</h3>", unsafe_allow_html=True)
 st.markdown(f"<h3 style='text-align: center; color: black;'>{__version__}</h3>", unsafe_allow_html=True)
+
 # Column layout
 col1, col2 = st.columns([0.5,0.5])
 
