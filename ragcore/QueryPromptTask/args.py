@@ -19,3 +19,6 @@ class DocuPromptArgs(BaseDocuPromptArgs):
 # Inherited class for multiple document prompts
 class MultiDocuPromptArgs(BaseDocuPromptArgs):
     pass  # No additional fields required
+
+class PDFdirectoryPromptArgs(BaseDocuPromptArgs):
+    input_directory: str = Field(description="input_directory")

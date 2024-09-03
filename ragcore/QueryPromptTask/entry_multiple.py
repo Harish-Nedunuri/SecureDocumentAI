@@ -42,6 +42,7 @@ class MultiDocPromptResponse:
         
         # Search the DB.
         results = db.similarity_search_with_score(self.arguments.query, k=2)
+        
         print(results)
         context_text = "\n\n---\n\n".join([doc.page_content for doc, _score in results])
         document_metadata = [doc.metadata["source"] for doc, _score in results]
